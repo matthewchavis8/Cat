@@ -19,7 +19,7 @@
 struct Cat {
     std::vector<std::string> content {};
     std::string output {};
-    bool is_line_numbers { true };
+    bool is_line_numbers { false };
     bool write_mode { false };
     int line_count { 1 };
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string_view>
 #include "include/Cat.hpp"
 #include "include/args.hpp"
 
@@ -8,18 +9,25 @@ int main (int argc, char* argv[]) {
 
     Cat cat;
     cli.flag("n");
-
-    if (cli.found("n"))
-        cat.is_line_numbers = true;
-
+    cli.flag("w");
 
     cli.parse(argc, argv);
 
-    for (std::size_t i{}; i < cli.args.size(); i++) 
-        cat.parse_file(cli.args[i]);
-    
-    cat.write_to_file(cli.args[0]);
-    // std::cout << cat;
+    if (cli.found("n"))
+        cat.is_line_numbers = true;
+    else if (cli.found("w"))
+        cat.write_mode = true;
+
+    if (cat.write_mode) {
+            cat.write_to_file(cli.args[0]);
+            
+    } else {
+        for (auto& arg : cli.args) 
+            cat.parse_file(arg);
+    }
+
+   
+    std::cout << cat;
 
     return 0;
 }
