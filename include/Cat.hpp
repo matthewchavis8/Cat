@@ -20,6 +20,7 @@ struct Cat {
     std::vector<std::string> content {};
     std::string output {};
     bool is_line_numbers { true };
+    bool write_mode { false };
     int line_count { 1 };
 
     operator const char*() {
@@ -33,4 +34,5 @@ struct Cat {
     }
 
     void parse_file (const std::string& file);
+    void write_to_file (const std::string& file_name);
 };

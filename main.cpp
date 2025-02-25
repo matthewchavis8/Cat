@@ -18,7 +18,8 @@ int main (int argc, char* argv[]) {
     for (std::size_t i{}; i < cli.args.size(); i++) 
         cat.parse_file(cli.args[i]);
     
-    std::cout << cat;
+    cat.write_to_file(cli.args[0]);
+    // std::cout << cat;
 
     return 0;
 }
