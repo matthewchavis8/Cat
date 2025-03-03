@@ -15,7 +15,7 @@ int main (int argc, char* argv[]) {
 
     if (cli.found("n"))
         cat.is_line_numbers = true;
-    else if (cli.found("w"))
+    if (cli.found("w"))
         cat.write_mode = true;
 
     if (cat.write_mode) {
