@@ -13,17 +13,19 @@ int main (int argc, char* argv[]) {
 
     cli.parse(argc, argv);
 
+    // checks if user wants to output line number
     if (cli.found("n"))
         cat.is_line_numbers = true;
+    // checks if users wants to write to a file instead
     if (cli.found("w"))
         cat.write_mode = true;
 
+
     if (cat.write_mode) {
-            cat.write_to_file(cli.args[0]);
-            
+        cat.write_to_file(cli.args[0]);
     } else {
-        for (auto& arg : cli.args) 
-            cat.parse_file(arg);
+        for (auto& file : cli.args) 
+            cat.parse_file(file);
     }
 
    
