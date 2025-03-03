@@ -19,7 +19,10 @@ int main (int argc, char* argv[]) {
     if (cli.found("w"))
         cat.write_mode = true;
 
-
+    /*
+        if user wants to write to a file call our write_to_file 
+        else we will just parse each file's content into our vector
+    */
     if (cat.write_mode) {
         cat.write_to_file(cli.args[0]);
     } else {
@@ -27,7 +30,6 @@ int main (int argc, char* argv[]) {
             cat.parse_file(file);
     }
 
-   
     std::cout << cat;
 
     return 0;

@@ -7,6 +7,7 @@
 #include "Cat.hpp"
 
 void Cat::parse_file (const std::string& path) {
+
     std::ifstream file(path);
     std::string line{};
     std::ostringstream res;
@@ -33,13 +34,16 @@ void Cat::parse_file (const std::string& path) {
         parse_file_with_line_numbers();
     else 
         parse_file_with_default();    
-    
+    //Adds our file content into our content Container
     content.push_back(res.str());
 }
+
 void Cat::write_to_file(const std::string& file_name) {
+    // added so you do not have to explicitly say ../ everytime
     std::string path{ "../" };
     path += file_name;
 
+    // Creates our file and in append mode
     std::ofstream file(path, std::ios::app);
 
     if (!file.is_open()) {
