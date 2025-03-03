@@ -6,7 +6,6 @@
 int main (int argc, char* argv[]) {
     args::ArgParser cli;
 
-
     Cat cat;
     cli.flag("n");
     cli.flag("w");
