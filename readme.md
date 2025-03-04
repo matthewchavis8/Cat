@@ -36,4 +36,5 @@ make
 ## How to use
 ```sh
 ./Cat [flags] files_you_want_to_open...
+```
 ---
