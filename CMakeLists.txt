@@ -34,6 +34,8 @@ add_executable(Cat
 add_executable(Cat_Tests
     tests/test_Cat.cpp
     tests/test_main.cpp
+    include/Cat.cpp
+    include/Cat.hpp
 )
 
 # Link googletest to tests
