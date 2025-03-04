@@ -43,5 +43,6 @@ target_link_libraries(Cat_Tests
     pthread
 )
 
+# Make Google test discoverable
 include(GoogleTest)
 gtest_discover_tests(Cat_Tests)
