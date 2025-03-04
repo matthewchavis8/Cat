@@ -1,6 +1,6 @@
-# 🐱 Cat - A Custom Implementation of the Linux `cat` Command  
+# 🐱 Cat - A Recreation of the Linux `cat` Command  
 
-Recreating the `cat` command in **Linux** with **C++**, using **CMake** for build management and **GoogleTest** for testing.  
+Recreating the `cat` command in **Linux**.
 
 ---
 
@@ -8,7 +8,8 @@ Recreating the `cat` command in **Linux** with **C++**, using **CMake** for buil
 - 📖 **Read files** and display their content in the terminal.
 - 🔢 **Line numbering** with `-n` flag.
 - 📝 **Write output to a file** with the `-w` flag.
-- 🛠️ Built with modern **C++20**, **CMake**, and **GoogleTest**.
+- 🛠️ Built with modern **C++**, **CMake**, and **GoogleTest**.
+- Use > to redirect the following files into one file
 
 ---
 
@@ -28,3 +29,11 @@ cmake ..
 
 # 4️⃣ Compile the project
 make
+
+```
+---
+
+## How to use
+```sh
+./Cat [flags] files_you_want_to_open...
+---
