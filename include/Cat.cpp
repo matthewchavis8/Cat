@@ -30,7 +30,7 @@ void Cat::parse_file (const std::string& path) {
         return;
     }   
 
-    if (is_line_numbers) 
+    if (line_number_mode) 
         parse_file_with_line_numbers();
     else 
         parse_file_with_default();    
@@ -54,4 +54,29 @@ void Cat::write_to_file(const std::string& file_name) {
     std::string content{};
     std::getline(std::cin, content);
     file << content << '\n';
+}
+
+void Cat::redirect_to_file (const std::vector<std::string>& args, Cat& cat) {
+    std::ofstream output_file;
+
+    for (std::size_t i{}; i < args.size(); ++i) {
+        if (args[i] == ">") {
+            if (i + 1 < args.size()) {
+                output_file.open(args[i + 1], std::ios::app);
+
+                if (!output_file.is_open()) {
+                    std::cerr << "Error opening the file";
+                    return;
+                }
+                ++i;
+            } else {
+                std::cerr << "Redirection operator '>' found without a file though";
+                return;
+            }
+        } else {
+            parse_file(args[i]);
+        }
+    }
+
+    output_file << cat;
 }

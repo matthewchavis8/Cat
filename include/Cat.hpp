@@ -20,9 +20,10 @@
 struct Cat {
     std::vector<std::string> content {};
     std::string output {};
-    bool is_line_numbers { false };
-    bool write_mode { false };
     int line_count { 1 };
+    bool line_number_mode { false };
+    bool write_mode { false };
+    bool redirection_mode { false }; 
 
     /**
      * Convers the Cat Object into a C style string by concatenating its content.
@@ -52,4 +53,12 @@ struct Cat {
      * @param file_name The name of the file we want to write content too
      */
     void write_to_file (const std::string& file_name);
+
+    /**
+     * Redirect files and concatonates those files into a new file
+     * 
+     * @param args Takes the arguments from the CLI and parses files before the < 
+     *              Which then it writes it into the file we want to insert into
+    */
+   void redirect_to_file (const std::vector<std::string>& args, Cat& cat);
 };

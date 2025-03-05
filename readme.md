@@ -9,7 +9,7 @@ Recreating the `cat` command in **Linux**.
 - 🔢 **Line numbering** with `-n` flag.
 - 📝 **Write output to a file** with the `-w` flag.
 - 🛠️ Built with modern **C++**, **CMake**, and **GoogleTest**.
-- Use > to redirect the following files into one file
+- ௷ Use > to redirect the following files into one file
 
 ---
 
@@ -36,5 +36,9 @@ make
 ## How to use
 ```sh
 ./Cat [flags] files_you_want_to_open...
+```
+#### Redirect files
+```sh
+./Cat [flags] file > file_you_want_to_redirect_into
 ```
 ---
