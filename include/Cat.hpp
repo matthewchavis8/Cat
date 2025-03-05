@@ -59,6 +59,6 @@ struct Cat {
      * 
      * @param args Takes the arguments from the CLI and parses files before the < 
      *              Which then it writes it into the file we want to insert into
-    */
+     */
    void redirect_to_file (const std::vector<std::string>& args, Cat& cat);
 };
