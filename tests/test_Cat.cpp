@@ -23,7 +23,7 @@ class CatTest : public ::testing::Test {
     Cat cat;
 
     void SetUp () override {
-      cat.is_line_numbers = false;
+      cat.line_number_mode = false;
       cat.write_mode = false;
       cat.line_count = 1;
 
@@ -36,7 +36,7 @@ class CatTest : public ::testing::Test {
     } 
 
     void TearDown () override {
-      cat.is_line_numbers = false;
+      cat.line_number_mode = false;
       cat.write_mode = false;
       cat.line_count = 1;
 
@@ -48,7 +48,7 @@ class CatTest : public ::testing::Test {
 // Test Cat is set up correctly
 TEST_F (CatTest, test_setup) {
   EXPECT_TRUE(cat.content.empty());
-  EXPECT_TRUE(!cat.is_line_numbers);
+  EXPECT_TRUE(!cat.line_number_mode);
   EXPECT_TRUE(!cat.write_mode);
   EXPECT_EQ(cat.line_count, 1);
 }
@@ -71,7 +71,7 @@ TEST_F (CatTest, test_parse_with_default) {
 // Test file parsing with numbers
 TEST_F (CatTest, test_parse_with_numbers) {
   cat.parse_file("test_file.txt");
-  cat.is_line_numbers = true;
+  cat.line_number_mode = true;
 
   const char* result { cat };
   EXPECT_STREQ(result, "I can read this file!\n\n");

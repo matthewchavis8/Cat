@@ -20,9 +20,10 @@
 struct Cat {
     std::vector<std::string> content {};
     std::string output {};
-    bool is_line_numbers { false };
-    bool write_mode { false };
     int line_count { 1 };
+    bool line_number_mode { false };
+    bool write_mode { false };
+    bool redirection_mode { false }; 
 
     /**
      * Convers the Cat Object into a C style string by concatenating its content.
