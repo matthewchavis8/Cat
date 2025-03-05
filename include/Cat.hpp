@@ -12,10 +12,10 @@
  * 
  * @param content This Vector holds the content of each file we parse
  * @param output  Stores the C style string used to print out our Cat obj
- * @param is_line_numbers Boolean value that controls turning on our line number flag
- * @param write_mode  Boolean value that controls if we would rather write to a file than output
+ * @param is_line_numbers Toggle line numbers displayed
+ * @param write_mode  Toggle write to a file
  * @param line_count  Counter that tracks the line count of our file
- * 
+ * @param redirection_mode Toggle redirect previous files into file after '>'
  */
 struct Cat {
     std::vector<std::string> content {};
