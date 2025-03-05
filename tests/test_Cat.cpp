@@ -14,6 +14,7 @@
  * T2: Test file parsing with numbers
  * T3: Test Convert Cat into C style array
  * T4: Test Write to file
+ * T5: Test file redirection '>'
  */
 
 // Fixture for Cat object
@@ -26,9 +27,12 @@ class CatTest : public ::testing::Test {
       cat.write_mode = false;
       cat.line_count = 1;
 
-      std::ofstream tmp_file("test_file.txt");
-      tmp_file << "I can read this file!";
-      tmp_file.close();
+      std::ofstream tmp_file1("test_file.txt");
+      tmp_file1 << "I can read this file!";
+      tmp_file1.close();
+
+      std::ofstream tmp_file2("tmp.txt");
+      tmp_file2.close();
     } 
 
     void TearDown () override {
@@ -37,6 +41,7 @@ class CatTest : public ::testing::Test {
       cat.line_count = 1;
 
       std::remove("test_file.txt");
+      std::remove("tmp.txt");
     }
 };
 
@@ -73,15 +78,8 @@ TEST_F (CatTest, test_parse_with_numbers) {
 }
 
 // Test file redirection
-TEST_F (CatTest, test_redirect_to_file) {
-  std::ofstream tmp_file("tmp.txt");
-  std::ostringstream res;
-
-
-  std::string line { "" };
-  std::string output { "" };
-  tmp_file.close();
-
+TEST_F(CatTest, test_redirect_to_file) {
+  
   std::vector<std::string> args {
     "test_file.txt",
     ">",
@@ -91,11 +89,13 @@ TEST_F (CatTest, test_redirect_to_file) {
   cat.redirect_to_file(args, cat);
 
   std::ifstream file("tmp.txt");
+  std::ostringstream res;
+  std::string line;
+
   while (std::getline(file, line))
     res << line << '\n';
-
-  output = res.str();
-  EXPECT_STREQ(output.c_str(), "I can read this file!\n\n");
-
   file.close();
+
+  std::string output = res.str();
+  EXPECT_STREQ(output.c_str(), "I can read this file!\n\n");
 }

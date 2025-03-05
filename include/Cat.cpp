@@ -57,19 +57,29 @@ void Cat::write_to_file(const std::string& file_name) {
 }
 
 void Cat::redirect_to_file (const std::vector<std::string>& args, Cat& cat) {
-    for (auto it = args.begin(); it != args.end(); it++) {
-        if (*it != ">") {
-            parse_file(*it);
-            it++;
-        } else {
-            it++;
-            std::ofstream file(*it, std::ios::app);
+    std::ofstream output_file;
+    bool redirection_found { false };
 
-            if (!file.is_open()) {
-                std::cerr << "Error opening the file";
+    for (std::size_t i{}; i < args.size(); ++i) {
+        if (args[i] == ">") {
+            if (i + 1 < args.size()) {
+                output_file.open(args[i + 1], std::ios::app);
+
+                if (!output_file.is_open()) {
+                    std::cerr << "Error opening the file";
+                    return;
+                }
+                redirection_found = true;
+                ++i;
+            } else {
+                std::cerr << "Redirection operator '>' found without a file though";
                 return;
             }
-            file << cat;
+        } else {
+            parse_file(args[i]);
         }
     }
+
+    if (redirection_found)
+        output_file << cat;
 }
