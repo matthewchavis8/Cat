@@ -52,4 +52,12 @@ struct Cat {
      * @param file_name The name of the file we want to write content too
      */
     void write_to_file (const std::string& file_name);
+
+    /**
+     * Redirect files and concatonates those files into a new file
+     * 
+     * @param args Takes the arguments from the CLI and parses files before the < 
+     *              Which then it writes it into the file we want to insert into
+    */
+   void redirect_to_file (const std::vector<std::string>& args, Cat& cat);
 };

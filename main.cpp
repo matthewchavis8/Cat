@@ -11,7 +11,6 @@ int main (int argc, char* argv[]) {
     cli.flag("w");
 
     cli.parse(argc, argv);
-
     // checks if user wants to output line number
     if (cli.found("n"))
         cat.is_line_numbers = true;

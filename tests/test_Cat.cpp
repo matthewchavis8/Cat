@@ -1,6 +1,11 @@
 #include <gtest/gtest.h>
 #include "../include/Cat.hpp"
 #include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <string>
 
 /**
  * Test for Cat struct
@@ -59,10 +64,38 @@ TEST_F (CatTest, test_parse_with_default) {
 }
 
 // Test file parsing with numbers
-TEST_F(CatTest, test_parse_with_numbers) {
+TEST_F (CatTest, test_parse_with_numbers) {
   cat.parse_file("test_file.txt");
   cat.is_line_numbers = true;
 
   const char* result { cat };
   EXPECT_STREQ(result, "I can read this file!\n\n");
+}
+
+// Test file redirection
+TEST_F (CatTest, test_redirect_to_file) {
+  std::ofstream tmp_file("tmp.txt");
+  std::ostringstream res;
+
+
+  std::string line { "" };
+  std::string output { "" };
+  tmp_file.close();
+
+  std::vector<std::string> args {
+    "test_file.txt",
+    ">",
+    "tmp.txt"
+  };
+
+  cat.redirect_to_file(args, cat);
+
+  std::ifstream file("tmp.txt");
+  while (std::getline(file, line))
+    res << line << '\n';
+
+  output = res.str();
+  EXPECT_STREQ(output.c_str(), "I can read this file!\n\n");
+
+  file.close();
 }

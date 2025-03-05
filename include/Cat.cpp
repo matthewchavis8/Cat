@@ -55,3 +55,21 @@ void Cat::write_to_file(const std::string& file_name) {
     std::getline(std::cin, content);
     file << content << '\n';
 }
+
+void Cat::redirect_to_file (const std::vector<std::string>& args, Cat& cat) {
+    for (auto it = args.begin(); it != args.end(); it++) {
+        if (*it != ">") {
+            parse_file(*it);
+            it++;
+        } else {
+            it++;
+            std::ofstream file(*it, std::ios::app);
+
+            if (!file.is_open()) {
+                std::cerr << "Error opening the file";
+                return;
+            }
+            file << cat;
+        }
+    }
+}
