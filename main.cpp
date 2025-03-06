@@ -18,7 +18,7 @@ int main (int argc, char* argv[]) {
     // checks if users wants to write to a file instead
     if (cli.found("w"))
         cat.write_mode = true;
-    // check if redirction operator was found ina arguments
+    // check if redirction operator was found in arguments
     if (std::find(cli.args.begin(), cli.args.end(), ">") != cli.args.end())
         cat.redirection_mode = true;
 

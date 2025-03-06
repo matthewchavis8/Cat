@@ -70,11 +70,11 @@ TEST_F (CatTest, test_parse_with_default) {
 
 // Test file parsing with numbers
 TEST_F (CatTest, test_parse_with_numbers) {
-  cat.parse_file("test_file.txt");
   cat.line_number_mode = true;
+  cat.parse_file("test_file.txt");
 
   const char* result { cat };
-  EXPECT_STREQ(result, "I can read this file!\n\n");
+  EXPECT_STREQ(result, "1: I can read this file!\n\n");
 }
 
 // Test file redirection
