@@ -8,8 +8,12 @@ Recreating the `cat` command in **Linux**.
 - 📖 **Read files** and display their content in the terminal.
 - 🔢 **Line numbering** with `-n` flag.
 - 📝 **Write output to a file** with the `-w` flag.
-- 🛠️ Built with modern **C++**, **CMake**, and **GoogleTest**.
+- 🔄 **Reverse output to a file** with the '-r' flag.
+- 💲 **Display a $ at the end of each line** with the '-e' flag.
+- ❌ **Ignore blank lines** with the '-s' flag.
+- 🙏 **Display help text** with '--help' flag.
 - ௷ Use > to redirect the following files into one file
+- 🛠️ Built with **C++**, **CMake**, and **GoogleTest**.
 
 ---
 

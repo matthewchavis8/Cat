@@ -7,9 +7,23 @@
 int main (int argc, char* argv[]) {
     args::ArgParser cli;
 
+    cli.helptext = "Usage: ./Cat [any flags] ../file_you_want \n\n\
+FLAGS:\n\
+-n Toggle line numbers displayed \n\
+-w Toggle write to a file \n\
+-r Toggle to reverse the output \n\
+-e Toggle to add a $ to the end of the line \n\
+-s Toggle to ignore blank lines \n\
+\n\
+REDIRECT FILES: \n\
+USAGE: ./Cat ../files_you_want_to_redirect > ../file_you_want_to_redirect_into\n";
+
     Cat cat;
     cli.flag("n");
     cli.flag("w");
+    cli.flag("r");
+    cli.flag("e");
+    cli.flag("s");
 
     cli.parse(argc, argv);
     // checks if user wants to output line number
@@ -18,9 +32,18 @@ int main (int argc, char* argv[]) {
     // checks if users wants to write to a file instead
     if (cli.found("w"))
         cat.write_mode = true;
-    // check if redirction operator was found ina arguments
+    // check if redirction operator was found in arguments
     if (std::find(cli.args.begin(), cli.args.end(), ">") != cli.args.end())
         cat.redirection_mode = true;
+    // check if user wants to reverse the output
+    if (cli.found("r"))
+        cat.reverse_parse_mode = true;
+    // check if user wants to mark the end of line
+    if (cli.found("e"))
+        cat.mark_end_of_line_mode = true;
+    // remove blank line mode
+    if (cli.found("s"))
+        cat.ignore_blank_line_mode = true;
 
 
     if (cat.redirection_mode) {

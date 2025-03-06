@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <algorithm>
 #include <vector>
 
 /**
@@ -16,6 +17,9 @@
  * @param write_mode  Toggle write to a file
  * @param line_count  Counter that tracks the line count of our file
  * @param redirection_mode Toggle redirect previous files into file after '>'
+ * @param reverse_parse_mode Toggle to reverse the output
+ * @param mark_end_of_line_mode Toggle to add a $ to the end of the line
+ * @param ignore_blank_line_mode Toggle to ignore blank lines
  */
 struct Cat {
     std::vector<std::string> content {};
@@ -24,6 +28,9 @@ struct Cat {
     bool line_number_mode { false };
     bool write_mode { false };
     bool redirection_mode { false }; 
+    bool reverse_parse_mode { false };
+    bool mark_end_of_line_mode { false };
+    bool ignore_blank_line_mode { false };
 
     /**
      * Convers the Cat Object into a C style string by concatenating its content.
@@ -31,6 +38,9 @@ struct Cat {
      * @returns A pointer to a null-terminated string representing the Cat's Content
      */
     operator const char*() {
+        if (reverse_parse_mode)
+            std::reverse(content.begin(), content.end());
+
         std::ostringstream result{};
 
         for (const auto& file : content) 
