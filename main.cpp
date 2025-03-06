@@ -10,6 +10,7 @@ int main (int argc, char* argv[]) {
     Cat cat;
     cli.flag("n");
     cli.flag("w");
+    cli.flag("r");
 
     cli.parse(argc, argv);
     // checks if user wants to output line number
@@ -21,6 +22,9 @@ int main (int argc, char* argv[]) {
     // check if redirction operator was found in arguments
     if (std::find(cli.args.begin(), cli.args.end(), ">") != cli.args.end())
         cat.redirection_mode = true;
+    // check if user wants to reverse the output
+    if (cli.found("r"))
+        cat.reverse_parse_mode = true;
 
 
     if (cat.redirection_mode) {

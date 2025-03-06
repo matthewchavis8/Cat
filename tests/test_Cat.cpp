@@ -15,6 +15,7 @@
  * T3: Test Convert Cat into C style array
  * T4: Test Write to file
  * T5: Test file redirection '>'
+ * T6: Test Reverse Parse
  */
 
 // Fixture for Cat object
@@ -25,7 +26,7 @@ class CatTest : public ::testing::Test {
     void SetUp () override {
       cat.line_number_mode = false;
       cat.write_mode = false;
-      cat.line_count = 1;
+      cat.reverse_parse_mode = false;
 
       std::ofstream tmp_file1("test_file.txt");
       tmp_file1 << "I can read this file!";
@@ -78,7 +79,7 @@ TEST_F (CatTest, test_parse_with_numbers) {
 }
 
 // Test file redirection
-TEST_F(CatTest, test_redirect_to_file) {
+TEST_F (CatTest, test_redirect_to_file) {
   
   std::vector<std::string> args {
     "test_file.txt",
@@ -98,4 +99,14 @@ TEST_F(CatTest, test_redirect_to_file) {
 
   std::string output = res.str();
   EXPECT_STREQ(output.c_str(), "I can read this file!\n\n");
+}
+
+// Test reverse parsing
+TEST_F (CatTest, test_reverse_parse) {
+  cat.reverse_parse_mode = true;
+
+  cat.content = {"Hello", "World"};
+  const char* result { cat };
+
+  EXPECT_STREQ(result, "World\nHello\n");
 }
