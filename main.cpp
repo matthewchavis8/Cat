@@ -7,6 +7,17 @@
 int main (int argc, char* argv[]) {
     args::ArgParser cli;
 
+    cli.helptext = "Usage: ./Cat [any flags] ../file_you_want \n\n\
+FLAGS:\n\
+-n Toggle line numbers displayed \n\
+-w Toggle write to a file \n\
+-r Toggle to reverse the output \n\
+-e Toggle to add a $ to the end of the line \n\
+-s Toggle to ignore blank lines \n\
+\n\
+REDIRECT FILES: \n\
+USAGE: ./Cat ../files_you_want_to_redirect > ../file_you_want_to_redirect_into\n";
+
     Cat cat;
     cli.flag("n");
     cli.flag("w");
