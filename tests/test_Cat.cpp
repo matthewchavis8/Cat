@@ -17,6 +17,7 @@
  * T5: Test file redirection '>'
  * T6: Test Reverse Parse
  * T7: Test mark end of line
+ * T8: Test ignore blank lines
  */
 
 // Fixture for Cat object
@@ -25,9 +26,6 @@ class CatTest : public ::testing::Test {
     Cat cat;
 
     void SetUp () override {
-      cat.line_number_mode = false;
-      cat.write_mode = false;
-      cat.reverse_parse_mode = false;
 
       std::ofstream tmp_file1("test_file.txt");
       tmp_file1 << "I can read this file!";
@@ -35,16 +33,23 @@ class CatTest : public ::testing::Test {
 
       std::ofstream tmp_file2("tmp.txt");
       tmp_file2.close();
+
+      std::ofstream tmp_file3("test_file_with_blank.txt");
+      tmp_file3 << "I can read this file!";
+      tmp_file3 << "\n\n\n";
+      tmp_file3 << "Hello World!";
+      tmp_file3.close();
     } 
 
     void TearDown () override {
       cat.line_number_mode = false;
       cat.write_mode = false;
       cat.reverse_parse_mode = false;
-      cat.line_count = 1;
+      cat.ignore_blank_line_mode = false;
 
       std::remove("test_file.txt");
       std::remove("tmp.txt");
+      std::remove("test_file_with_blank.txt");
     }
 };
 
@@ -121,4 +126,14 @@ TEST_F (CatTest, test_mark_end_of_line) {
   const char* result { cat };
 
   EXPECT_STREQ(result, "I can read this file!$\n\n");
+}
+
+// Test Ignore blank lines mode
+TEST_F (CatTest, test_ignore_blank_lines) {
+  cat.ignore_blank_line_mode = true;
+  cat.parse_file("test_file_with_blank.txt");
+
+  const char* result { cat };
+
+  EXPECT_STREQ(result, "I can read this file!\nHello World!\n\n");
 }

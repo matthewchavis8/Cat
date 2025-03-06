@@ -19,6 +19,7 @@
  * @param redirection_mode Toggle redirect previous files into file after '>'
  * @param reverse_parse_mode Toggle to reverse the output
  * @param mark_end_of_line_mode Toggle to add a $ to the end of the line
+ * @param ignore_blank_line_mode Toggle to ignore blank lines
  */
 struct Cat {
     std::vector<std::string> content {};
@@ -29,6 +30,7 @@ struct Cat {
     bool redirection_mode { false }; 
     bool reverse_parse_mode { false };
     bool mark_end_of_line_mode { false };
+    bool ignore_blank_line_mode { false };
 
     /**
      * Convers the Cat Object into a C style string by concatenating its content.

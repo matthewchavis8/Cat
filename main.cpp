@@ -12,6 +12,7 @@ int main (int argc, char* argv[]) {
     cli.flag("w");
     cli.flag("r");
     cli.flag("e");
+    cli.flag("s");
 
     cli.parse(argc, argv);
     // checks if user wants to output line number
@@ -29,6 +30,9 @@ int main (int argc, char* argv[]) {
     // check if user wants to mark the end of line
     if (cli.found("e"))
         cat.mark_end_of_line_mode = true;
+    // remove blank line mode
+    if (cli.found("s"))
+        cat.ignore_blank_line_mode = true;
 
 
     if (cat.redirection_mode) {
