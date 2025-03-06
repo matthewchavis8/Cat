@@ -9,7 +9,8 @@ Recreating the `cat` command in **Linux**.
 - 🔢 **Line numbering** with `-n` flag.
 - 📝 **Write output to a file** with the `-w` flag.
 - 🔄 **Reverse output to a file** with the '-r' flag.
-- 🛠️ Built with modern **C++**, **CMake**, and **GoogleTest**.
+- 💲 **Display a $ at the end of each line** with the 'e' flag.
+- 🛠️ Built with **C++**, **CMake**, and **GoogleTest**.
 - ௷ Use > to redirect the following files into one file
 
 ---

@@ -16,6 +16,7 @@
  * T4: Test Write to file
  * T5: Test file redirection '>'
  * T6: Test Reverse Parse
+ * T7: Test mark end of line
  */
 
 // Fixture for Cat object
@@ -39,6 +40,7 @@ class CatTest : public ::testing::Test {
     void TearDown () override {
       cat.line_number_mode = false;
       cat.write_mode = false;
+      cat.reverse_parse_mode = false;
       cat.line_count = 1;
 
       std::remove("test_file.txt");
@@ -104,9 +106,19 @@ TEST_F (CatTest, test_redirect_to_file) {
 // Test reverse parsing
 TEST_F (CatTest, test_reverse_parse) {
   cat.reverse_parse_mode = true;
-
   cat.content = {"Hello", "World"};
+
   const char* result { cat };
 
   EXPECT_STREQ(result, "World\nHello\n");
+}
+
+// Test mark end of line mode
+TEST_F (CatTest, test_mark_end_of_line) {
+  cat.mark_end_of_line_mode = true;
+  cat.parse_file("test_file.txt");
+
+  const char* result { cat };
+
+  EXPECT_STREQ(result, "I can read this file!$\n\n");
 }

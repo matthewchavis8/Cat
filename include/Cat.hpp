@@ -18,6 +18,7 @@
  * @param line_count  Counter that tracks the line count of our file
  * @param redirection_mode Toggle redirect previous files into file after '>'
  * @param reverse_parse_mode Toggle to reverse the output
+ * @param mark_end_of_line_mode Toggle to add a $ to the end of the line
  */
 struct Cat {
     std::vector<std::string> content {};
@@ -27,6 +28,7 @@ struct Cat {
     bool write_mode { false };
     bool redirection_mode { false }; 
     bool reverse_parse_mode { false };
+    bool mark_end_of_line_mode { false };
 
     /**
      * Convers the Cat Object into a C style string by concatenating its content.

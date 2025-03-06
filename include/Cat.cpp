@@ -12,7 +12,7 @@ void Cat::parse_file (const std::string& path) {
     std::string line{};
     std::ostringstream res;
 
-    //Parse with line numbers
+    // Parse with line numbers
     auto parse_file_with_line_numbers = [&]() {
         while (std::getline(file, line)) {
             res << line_count << ": " << line << '\n';
@@ -25,6 +25,12 @@ void Cat::parse_file (const std::string& path) {
             res << line << '\n';
     };
 
+    // Parse with line ending with $]
+    auto parse_file_with_dollar = [&]() {
+        while (std::getline(file, line)) 
+            res << line << "$" << '\n';
+    };
+
     if (!file.is_open()) {
         std::cerr << "Error parsing our file" << '\n';
         return;
@@ -32,6 +38,8 @@ void Cat::parse_file (const std::string& path) {
 
     if (line_number_mode) 
         parse_file_with_line_numbers();
+    else if (mark_end_of_line_mode)
+        parse_file_with_dollar();
     else 
         parse_file_with_default();    
     //Adds our file content into our content Container
