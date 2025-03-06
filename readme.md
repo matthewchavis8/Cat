@@ -11,6 +11,7 @@ Recreating the `cat` command in **Linux**.
 - 🔄 **Reverse output to a file** with the '-r' flag.
 - 💲 **Display a $ at the end of each line** with the '-e' flag.
 - ❌ **Ignore blank lines** with the '-s' flag.
+- 🙏 **Display help text** with '--help' flag.
 - 🛠️ Built with **C++**, **CMake**, and **GoogleTest**.
 - ௷ Use > to redirect the following files into one file
 
